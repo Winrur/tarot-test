@@ -1,23 +1,21 @@
 <!DOCTYPE html>
 <html>
     <head>
-
-        <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
         <script src="https://sdk.altvr.com/libs/altspace.js/2.8.0/altspace.min.js"></script>
+        <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+
 
     </head>
     <body>
 
-        <!-- set up the scene -->
-        <a-scene altspace="fullspace: true">
+       <a-scene altspace='vertical-align: bottom;'>
 
             <a-assets>
-                <a-asset-item id="table-obj" src="models/table/table.obj"></a-asset-item>
-                <a-asset-item id="table-mtl" src="models/table/table.mtl"></a-asset-item>
+                <a-asset-item id="model-obj" src="table.obj"></a-asset-item>
+                <a-asset-item id="model-mtl" src="table.mtl"></a-asset-item>
             </a-assets>
 
-            <a-entity obj-model="obj: #table-obj; mtl: #table-mtl" position="0 1 0" scale="0.1 0.1 0.1"></a-entity>
-
+            <a-entity obj-model="obj: #model-obj; mtl: #model-mtl"></a-entity>
         </a-scene>
 
     </body>
