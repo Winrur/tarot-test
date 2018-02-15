@@ -1,21 +1,47 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="https://sdk.altvr.com/libs/altspace.js/2.8.0/altspace.min.js"></script>
         <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
-
-
+        <script src="https://sdk.altvr.com/libs/altspace.js/2.7.3/altspace.min.js"></script>
+        <script src="https://cdn.rawgit.com/mrdoob/three.js/r84/build/three.js"></script>
     </head>
     <body>
+        <script>
+            // wraps up the renderer, scene, and animation loop
+            var sim = new altspace.utilities.Simulation();
 
-       <a-scene altspace='vertical-align: bottom;'>
+            var loader = new THREE.ImageLoader();
+
+            var newTex = new THREE.MeshBasicMaterial({ map: loader.load('/tarot/' + THREE.Math.randInt(1, 8) + ".jpg" ) });
+
+            var newCube = new THREE.BoxGeometry(200, 200, 200);
+
+            var cubeWithTex = new THREE.Mesh( newCube, newTex );
+
+            sim.scene.add(cubeWithTex);
+
+        </script>
+        <a-scene altspace="fullspace:true">
 
             <a-assets>
-                <a-asset-item id="model-obj" src="table.obj"></a-asset-item>
-                <a-asset-item id="model-mtl" src="table.mtl"></a-asset-item>
+                <a-asset-item id="tablecloth-obj" src="models/tablecloth.obj"></a-asset-item>
+                <a-asset-item id="tablecloth-mtl" src="models/tablecloth.mtl"></a-asset-item>
+                <a-asset-item id="base-obj" src="models/base.obj"></a-asset-item>
+                <a-asset-item id="base-mtl" src="models/base.mtl"></a-asset-item>
+                <a-asset-item id="tablemain-obj" src="models/tablemain.obj"></a-asset-item>
+                <a-asset-item id="tablemain-mtl" src="models/tablemain.mtl"></a-asset-item>
+                <img id="card-back" src="images/card-back.jpg" />
+
             </a-assets>
 
-            <a-entity obj-model="obj: #model-obj; mtl: #model-mtl"></a-entity>
+            <a-entity obj-model="obj: #tablecloth-obj ; mtl: #tablecloth-mtl" scale="0.007 0.007 0.007" position="0 -0.2 0" n-mesh-collider='type: environment'></a-entity>
+            <a-entity obj-model="obj: #base-obj ; mtl: #base-mtl" scale="0.007 0.007 0.007" position="0 -0.2 0" n-mesh-collider='type: environment'></a-entity>
+            <a-entity obj-model="obj: #tablemain-obj ; mtl: #tablemain-mtl" scale="0.007 0.007 0.007" position="0 -0.2 0" n-mesh-collider='type: environment'></a-entity>
+            <a-plane id="temp" src="models/tablecloth.jpg" n-billboard position="0 6 0" color="white" scale="1.4 2"></a-plane>
+            <a-box material="src: #card-back" scale="0.5 0.01 1" position="-0.6 1.30 0.6"></a-box>
+            <a-box material="src: #card-back" scale="0.5 0.01 1" position="0 1.3 0.6"></a-box>
+            <a-box material="src: #card-back" scale="0.5 0.01 1" position="0.6 1.3 0.6"></a-box>
+
         </a-scene>
 
     </body>
